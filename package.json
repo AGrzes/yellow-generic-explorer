@@ -4,7 +4,7 @@
   "description": "Generic yellow model explorer",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
