@@ -4,7 +4,7 @@
   "description": "Generic yellow model explorer",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AGrzes/yellow-generic-explorer/issues"
   },
-  "homepage": "https://github.com/AGrzes/yellow-generic-explorer#readme"
+  "homepage": "https://github.com/AGrzes/yellow-generic-explorer#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
