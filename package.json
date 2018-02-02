@@ -1,0 +1,19 @@
+{
+  "name": "yellow-generic-explorer",
+  "version": "0.0.0",
+  "description": "Generic yellow model explorer",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AGrzes/yellow-generic-explorer.git"
+  },
+  "author": "Grzegorz Abramczyk <abramczykg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AGrzes/yellow-generic-explorer/issues"
+  },
+  "homepage": "https://github.com/AGrzes/yellow-generic-explorer#readme"
+}
