@@ -1,1 +1,2 @@
-console.log("Hello webpack")
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
