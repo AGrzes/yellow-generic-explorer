@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import gatData from './data'
 import _ from 'lodash'
+import expr from 'expression-eval'
 Vue.use(VueRouter)
 const routes = [{
   name: 'list',
@@ -32,8 +33,7 @@ const routes = [{
       items(){
         if (this.data){
           if (this.filterMethod){
-            console.log(this.filterMethod)
-            return _.filter(this.data.items,(item)=>this.filterMethod.apply(item))
+            return _.filter(this.data.items,(item)=>this.filterMethod(item))
           } else {
             return this.data.items
           }
@@ -42,9 +42,9 @@ const routes = [{
       filterMethod(){
         if (this.filter){
           try {
-            return new Function('return '+this.filter)
-          } finally {
-
+            return expr.compile(this.filter)
+          } catch(e) {
+            console.error(e)
           }
         }
       }
