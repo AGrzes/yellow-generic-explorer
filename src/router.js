@@ -7,20 +7,49 @@ const routes = [{
   name: 'list',
   path: '/list',
   component: {
-    template: `<div class="row">
-      <div class="col-3">
-        <yellow-link-list :items="data.items"></yellow-link-list>
+    template: `<div>
+      <div class="row">
+        <input v-model="filter" type="text" placeholder="Filter" class="col-12">
+      </input>
       </div>
-      <div class="col-9">
-        <router-view></router-view>
+      <div class="row">
+        <div class="col-3">
+          <yellow-link-list :items="items"></yellow-link-list>
+        </div>
+        <div class="col-9">
+          <router-view></router-view>
+        </div>
       </div>
     </div>`,
     data(){
       gatData.then((data)=>this.data = data)
       return {
-        data:{}
+        data:null,
+        filter:''
       }
-    }
+    },
+    computed:{
+      items(){
+        if (this.data){
+          if (this.filterMethod){
+            console.log(this.filterMethod)
+            return _.filter(this.data.items,(item)=>this.filterMethod.apply(item))
+          } else {
+            return this.data.items
+          }
+        }
+      },
+      filterMethod(){
+        if (this.filter){
+          try {
+            return new Function('return '+this.filter)
+          } finally {
+
+          }
+        }
+      }
+    },
+   
   },
   children: [{
     name: 'item',
