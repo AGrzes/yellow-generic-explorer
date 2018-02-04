@@ -1,3 +1,20 @@
 {
-  "hello": "world!"
+  "items": [{
+    "key": "a",
+    "name": "A"
+  }, {
+    "key": "b",
+    "name": "B"
+  }, {
+    "key": "c",
+    "name": "C",
+    "@child": {
+      "key": "e",
+      "name": "E"
+    }
+  }, {
+    "key": "d",
+    "name": "D",
+    "@child": "a"
+  }]
 }
