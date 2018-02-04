@@ -28,13 +28,11 @@ const routes = [{
     component: {
       template: `<yellow-entity-details :entity="entity"></yellow-entity-details>`,
       beforeRouteEnter (to, from, next) {
-        console.log('beforeRouteEnter')
         gatData.then((data) => {
           next(vm => vm.entity = _.find(data.items, _.matchesProperty('key', to.params.key)))
         })
       },
       beforeRouteUpdate(to, from, next) {
-        console.log('beforeRouteUpdate')
         gatData.then((data) => {
           this.entity = _.find(data.items, _.matchesProperty('key', to.params.key))
           next()
