@@ -12,7 +12,7 @@ app.get('*',(req,res)=>{
 const util = require('util')
 const server = app.listen(0,'0.0.0.0',function () {
   const address = server.address()
-  const url = `http://${address.address}:${address.port}`
+  const url = `http://${address.address}:${address.port}/list`
   console.log(`Generic explorer available on ${url}!`)
   open(url)
 })
