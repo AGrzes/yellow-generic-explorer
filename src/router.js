@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import gatData from './data'
+import _ from 'lodash'
 Vue.use(VueRouter)
 const routes = [{
   name: 'list',
@@ -25,7 +26,25 @@ const routes = [{
     name: 'item',
     path: ':key',
     component: {
-      template: `<p>item</p>`
+      template: `<yellow-entity-details :entity="entity"></yellow-entity-details>`,
+      beforeRouteEnter (to, from, next) {
+        console.log('beforeRouteEnter')
+        gatData.then((data) => {
+          next(vm => vm.entity = _.find(data.items, _.matchesProperty('key', to.params.key)))
+        })
+      },
+      beforeRouteUpdate(to, from, next) {
+        console.log('beforeRouteUpdate')
+        gatData.then((data) => {
+          this.entity = _.find(data.items, _.matchesProperty('key', to.params.key))
+          next()
+        })
+      },
+      data(){
+        return {
+          entity:{}
+        }
+      }
     }
   }]
 }]
