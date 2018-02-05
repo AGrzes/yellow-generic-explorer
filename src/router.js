@@ -10,7 +10,9 @@ const routes = [{
   component: {
     template: `<div>
       <div class="row">
-        <input v-model="filter" type="text" placeholder="Filter" class="col-12">
+        <div class="col-12">
+        <input v-model="filter" type="text" placeholder="Filter" class="form-control">
+        </div>
       </input>
       </div>
       <div class="row mt-3">
