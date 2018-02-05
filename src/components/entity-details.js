@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import _ from 'lodash'
+import {attributes} from '../metadata'
 Vue.component('yellow-entity-details', {
   template: `<div>
     <div class="row" v-for="attribute in attributes">
@@ -19,11 +20,7 @@ Vue.component('yellow-entity-details', {
   },
   computed: {
     attributes() {
-      return _(Object.getOwnPropertyNames(this.entity)).filter((name) => !_.startsWith(name, '@') && name !== '__ob__').map((name) => ({
-        name,
-        label: _.startCase(name),
-        value: this.entity[name]
-      })).value()
+      return attributes(this.entity)
     },
     relations() {
       return _(Object.getOwnPropertyNames(this.entity)).filter((name) => _.startsWith(name, '@') && name !== '__ob__').map((name) => ({

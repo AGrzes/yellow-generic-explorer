@@ -12,7 +12,18 @@ function identity(entity){
   }
 }
 
+function attributes(entity){
+  if (entity){
+    return _(Object.getOwnPropertyNames(entity)).filter((name) => !_.startsWith(name, '@') && name !== '__ob__').map((name) => ({
+      name,
+      label: _.startCase(name),
+      value: entity[name]
+    })).value()
+  }
+}
+
 export {
   label,
-  identity
+  identity,
+  attributes
 }
