@@ -13,7 +13,7 @@ const routes = [{
         <input v-model="filter" type="text" placeholder="Filter" class="col-12">
       </input>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-3">
           <yellow-link-list :items="items"></yellow-link-list>
         </div>
