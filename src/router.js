@@ -46,7 +46,6 @@ const routes = [{
           try {
             return expr.compile(this.filter)
           } catch(e) {
-            console.error(e)
           }
         }
       }
