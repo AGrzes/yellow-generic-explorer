@@ -12,9 +12,13 @@ function identity(entity){
   }
 }
 
+function isRelation(entity,property){
+  return _.startsWith(property, '@')
+}
+
 function attributes(entity){
   if (entity){
-    return _(Object.getOwnPropertyNames(entity)).filter((name) => !_.startsWith(name, '@') && name !== '__ob__').map((name) => ({
+    return _(Object.getOwnPropertyNames(entity)).filter((name) => !isRelation(entity,name) && name !== '__ob__').map((name) => ({
       name,
       label: _.startCase(name),
       value: entity[name]
@@ -24,7 +28,7 @@ function attributes(entity){
 
 function relations(entity){
   if (entity){
-    return _(Object.getOwnPropertyNames(entity)).filter((name) => _.startsWith(name, '@') && name !== '__ob__').map((name) => ({
+    return _(Object.getOwnPropertyNames(entity)).filter((name) => isRelation(entity,name) && name !== '__ob__').map((name) => ({
       name,
       label: _.startCase(name),
       entity: entity[name]
@@ -36,5 +40,6 @@ export {
   label,
   identity,
   attributes,
-  relations
+  relations,
+  isRelation
 }
