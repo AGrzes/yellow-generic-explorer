@@ -1,10 +1,8 @@
 import Vue from 'vue'
 Vue.component('yellow-link-list', {
-  template: `<ul>
-    <li v-for="item in items">
-      <yellow-entity-link :entity="item"></yellow-entity-link>
-    </li>
-  </ul>`,
+  template: `<div class="list-group">
+      <yellow-entity-link class="list-group-item list-group-item-action" v-for="item in items" active-class="active" :entity="item"></yellow-entity-link>
+  </div>`,
   props: {
     items: {
       type: Array,

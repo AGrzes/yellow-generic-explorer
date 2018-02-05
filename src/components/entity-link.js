@@ -6,7 +6,7 @@ Vue.component('yellow-entity-link', {
     entity: {
       type: Object,
       required: true
-    },
+    }
   },
   computed: {
     label(){
