@@ -58,12 +58,12 @@ const routes = [{
       template: `<yellow-entity-details :entity="entity"></yellow-entity-details>`,
       beforeRouteEnter (to, from, next) {
         gatData.then((data) => {
-          next(vm => vm.entity = _.find(data.items, _.matchesProperty('key', to.params.key)))
+          next(vm => vm.entity = data.find(to.params.key))
         })
       },
       beforeRouteUpdate(to, from, next) {
         gatData.then((data) => {
-          this.entity = _.find(data.items, _.matchesProperty('key', to.params.key))
+          this.entity = data.find(to.params.key)
           next()
         })
       },

@@ -24,6 +24,9 @@ module.exports = axios.get('/data').then(_.property('data')).then((data)=>{
     })
   })
   return {
-    items: _.values(itemMap)
+    items: _.values(itemMap),
+    find(key){
+      return itemMap[key]
+    }
   }
 })
