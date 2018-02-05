@@ -6,7 +6,13 @@ function label(entity) {
   }
 }
 
+function identity(entity){
+  if (entity) {
+    return entity.key || _.kebabCase(label(entity))
+  }
+}
 
 export {
-  label
+  label,
+  identity
 }

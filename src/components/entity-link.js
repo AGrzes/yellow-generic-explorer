@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import {label} from '../metadata'
+import {label,identity} from '../metadata'
 Vue.component('yellow-entity-link', {
-  template: `<router-link :to="{ name: 'item', params: { key: entity.key }}">{{label}}</router-link>`,
+  template: `<router-link :to="{ name: 'item', params: { key: key }}">{{label}}</router-link>`,
   props: {
     entity: {
       type: Object,
@@ -11,6 +11,9 @@ Vue.component('yellow-entity-link', {
   computed: {
     label(){
       return label(this.entity)
+    },
+    key(){
+      return identity(this.entity)
     }
   }
 })
