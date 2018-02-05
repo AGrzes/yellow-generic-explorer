@@ -25,32 +25,35 @@ const routes = [{
       </div>
     </div>`,
     data(){
-      gatData.then((data)=>this.data = data)
+      gatData.then((data)=>{
+        this.data = data
+        this.items = data.items
+      })
       return {
         data:null,
-        filter:''
+        filter:'',
+        items:[]
       }
     },
-    computed:{
-      items(){
-        if (this.data){
-          if (this.filterMethod){
-            return _.filter(this.data.items,(item)=>this.filterMethod(item))
-          } else {
-            return this.data.items
-          }
-        }
-      },
-      filterMethod(){
-        if (this.filter){
+    methods: {
+      updateFilter: _.debounce(function (filter) {
+        if (filter && filter != '') {
           try {
-            return expr.compile(this.filter)
-          } catch(e) {
+            const filterMethod = expr.compile(filter)
+            this.items = _.filter(this.data.items, (item) => filterMethod(item))
+          } catch (e) {
+            this.items = this.data.items
           }
+        } else {
+          this.items = this.data.items
         }
-      }
+      }, 1000)
     },
-   
+    watch:{
+      filter(newFilter,oldFilter){
+        this.updateFilter(newFilter)
+      }
+    }
   },
   children: [{
     name: 'item',
