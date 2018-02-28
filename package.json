@@ -26,7 +26,8 @@
     "opn": "^5.2.0",
     "popper.js": "^1.12.9",
     "vue": "^2.5.13",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "css-loader": "^0.28.9",
