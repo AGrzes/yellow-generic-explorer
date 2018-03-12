@@ -15,7 +15,7 @@ module.exports = axios.get('/data').then(_.property('data')).then((data)=>{
       return []
     }
   }
-  const itemMap =_(data.items).flatMapDeep(extractEntities).keyBy(identity).value()
+  const itemMap =_(data.items).flatMapDeep(extractEntities).filter(identity).keyBy(identity).value()
   _.forEach(itemMap,(item)=>{
     _.forEach(item,(target,name)=>{
       if (isRelation(item,name)){
