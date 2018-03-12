@@ -18,8 +18,12 @@ module.exports = axios.get('/data').then(_.property('data')).then((data)=>{
   const itemMap =_(data.items).flatMapDeep(extractEntities).keyBy(identity).value()
   _.forEach(itemMap,(item)=>{
     _.forEach(item,(target,name)=>{
-      if (isRelation(item,name) &&_.isString(target) && itemMap[target]){
-        item[name] = itemMap[target]
+      if (isRelation(item,name)){
+        if (_.isString(target)){
+          item[name] = itemMap[target] || target
+        } else if (_.isArray(target)){
+          item[name] = _.map(target,(targetItem)=> itemMap[targetItem] || targetItem)
+        }
       }
     })
   })
