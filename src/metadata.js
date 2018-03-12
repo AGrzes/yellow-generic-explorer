@@ -16,9 +16,14 @@ function isRelation(entity,property){
   return _.startsWith(property, '@')
 }
 
+function isInternal(entity,property){
+  console.log(`isInternal(${entity},${property})`)
+  return _.startsWith(property, '$')
+}
+
 function attributes(entity){
   if (entity){
-    return _(Object.getOwnPropertyNames(entity)).filter((name) => !isRelation(entity,name) && name !== '__ob__').map((name) => ({
+    return _(Object.getOwnPropertyNames(entity)).filter((name) => !isRelation(entity,name) && name !== '__ob__' && !isInternal(entity,name)).map((name) => ({
       name,
       label: _.startCase(name),
       value: entity[name]
@@ -28,7 +33,7 @@ function attributes(entity){
 
 function relations(entity){
   if (entity){
-    return _(Object.getOwnPropertyNames(entity)).filter((name) => isRelation(entity,name) && name !== '__ob__').map((name) => ({
+    return _(Object.getOwnPropertyNames(entity)).filter((name) => isRelation(entity,name) && name !== '__ob__' && !isInternal(entity,name)).map((name) => ({
       name,
       label: _.startCase(name),
       entity: entity[name]
@@ -41,5 +46,6 @@ export {
   identity,
   attributes,
   relations,
-  isRelation
+  isRelation,
+  isInternal
 }
