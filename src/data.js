@@ -1,6 +1,6 @@
 const axios = require('axios')
 const _ = require('lodash')
-const {identity,isRelation} = require('./metadata')
+const {identity,isRelation,reversedRelation} = require('./metadata')
 module.exports = axios.get('/data').then(_.property('data')).then((data)=>{
   const extractEntities = (entity)=>{
     if (entity && _.isObject(entity)){
@@ -19,10 +19,21 @@ module.exports = axios.get('/data').then(_.property('data')).then((data)=>{
   _.forEach(itemMap,(item)=>{
     _.forEach(item,(target,name)=>{
       if (isRelation(item,name)){
+        const reverse = reversedRelation(item,name)
         if (_.isString(target)){
           item[name] = itemMap[target] || target
+          if (reverse && itemMap[target]){
+            itemMap[target][reverse] = item
+          }
         } else if (_.isArray(target)){
           item[name] = _.map(target,(targetItem)=> itemMap[targetItem] || targetItem)
+          if (reverse){
+            _.forEach(target,(targetItem)=>{
+              if (itemMap[targetItem]){
+                itemMap[targetItem][reverse] = item
+              }
+            })
+          }
         }
       }
     })
