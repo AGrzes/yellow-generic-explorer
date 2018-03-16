@@ -4,7 +4,12 @@ const {identity,isRelation,reversedRelation} = require('./metadata')
 
 function setProperty(target,property,value){
   if (target){
-    target[property] = value
+    if (target[property]){
+      target[property] = _.flattenDeep([target[property],value])
+    } else {
+      target[property] = value
+    }
+
   }
 }
 
